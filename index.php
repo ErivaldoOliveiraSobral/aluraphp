@@ -20,10 +20,10 @@
 					<td>Senha</td>
 					<td><input class="form-control" type="password" name="senha"></td>
 				</tr>
-				<tr>
-					<td><button type="submit" class="btn btn-primary">Entrar</button></td>
-				</tr>
 			</table>
+			<tr>
+				<td><button type="submit" class="btn btn-primary">Entrar</button></td>
+			</tr>
 		</form>
 		<?php
 	}
