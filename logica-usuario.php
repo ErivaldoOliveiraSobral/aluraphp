@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 /*
 * Retorna TRUE em $_GET["falhaDeSeguranca"] e rdireciona para index.php, caso o usuário não esteja logado
 */
@@ -14,14 +16,16 @@ function verificaUsuario() {
  * Verifica se o COOKIE esta setado
  */
 function usuarioEstaLogado() {
-	return isset($_COOKIE["usuario_logado"]);
+	return isset($_SESSION["usuario_logado"]);
+	//return isset($_COOKIE["usuario_logado"]);
 }
 
 /*
 * Retorna o COOKIE do usuário logado
 */
 function usuarioLogado() {
-	return $_COOKIE["usuario_logado"];
+	return $_SESSION["usuario_logado"];
+	//return $_COOKIE["usuario_logado"];
 }
 
 
@@ -29,7 +33,8 @@ function usuarioLogado() {
 * Seta o $_COOKIE["usuario_logado"] com o valor recebido por parânmetro e um time-out de 60 segundos
 */
 function logaUsuario($email) {
-	return setcookie("usuario_logado", $email, time()+60);
+	$_SESSION["usuario_logado"] = $email;
+	//return setcookie("usuario_logado", $email, time()+60);
 }
 
 /*
