@@ -21,12 +21,12 @@
 	//verificar resultado
 	if(insereProduto($conexao,$nome,$preco,$descricao,$categoria_id,$usado)){
 		?>
-			<p class="alert-success">Produto <?= $nome ?>, R$ <?= $preco ?> adicionado com sucesso!</p>
+			<p class="text-success">Produto <?= $nome ?>, R$ <?= $preco ?> adicionado com sucesso!</p>
 		<?php
 	} else {
 		$mensagem_de_erro = mysqli_error($conexao);
 		?>
-			<p class="alert-danger">Produto <?= $nome ?> não adicionado!</p>
+			<p class="text-danger">Produto <?= $nome ?> não adicionado!</p>
 			<p class="text-danger">Motivo: <?= $mensagem_de_erro ?></p>
 		<?php
 	}
