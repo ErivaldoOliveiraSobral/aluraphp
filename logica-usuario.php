@@ -47,10 +47,17 @@ function usuarioNaoAutorizado() {
 }
 
 function validarLogin() {
+	if (isset($_GET["logout"]) && $_GET["logout"] == true){
+		?><p class="alert-success">Deslogado com sucesso</p><?php
+	}
 	if (isset($_GET["login"]) && $_GET["login"] == true){
 		?><p class="alert-success">Logado com sucesso</p><?php
 	}
 	if (isset($_GET["login"]) && $_GET["login"] == false){
 		?><p class="alert-danger">Usuário ou senha inválida</p><?php
 	}
+}
+
+function logout() {
+	session_destroy();
 }
