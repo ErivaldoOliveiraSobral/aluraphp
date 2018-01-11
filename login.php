@@ -9,6 +9,8 @@
 		header("Location: index.php?login=0");
 	} else {
 		logaUsuario($usuario["email"]);
+		//setcookie("senha_usuario", $usuario["senha"]);
+		//setcookie("senha_usuario", $_POST["senha"]);
 		header("Location: index.php?login=1");
 	}
 ?>
