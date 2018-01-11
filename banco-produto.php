@@ -12,7 +12,6 @@
 	function insereProduto($conexao,$nome,$preco,$descricao,$categoria_id,$usado){
 		//escrever query
 		$query = "insert into produtos (nome,preco,descricao,categoria_id,usado) values ('{$nome}','{$preco}','{$descricao}','{$categoria_id}','{$usado}');";
-		echo $query;
 		//enviar para o banco
 		return mysqli_query($conexao,$query);
 	}

@@ -6,11 +6,13 @@
 	$usuario = buscaUsuario($conexao, $_POST["email"], $_POST["senha"]);
 
 	if ($usuario == null) {
-		header("Location: index.php?login=0");
+		$_SESSION["danger"] = "Usuário ou senha inválida!";
+		header("Location: index.php");
 	} else {
+		$_SESSION["success"] = "Logado com sucesso!";
 		logaUsuario($usuario["email"]);
 		//setcookie("senha_usuario", $usuario["senha"]);
 		//setcookie("senha_usuario", $_POST["senha"]);
-		header("Location: index.php?login=1");
+		header("Location: index.php");
 	}
 ?>
