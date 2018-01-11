@@ -2,6 +2,10 @@
 	include("cabecalho.php");
 	include('conecta.php');
 	include('banco-produto.php');
+	include('logica-usuario.php');
+
+	//Proteje para que não seja adicionado sem que o usuário estaja logado
+	verificaUsuario();
 
 	//variáveis
 	$nome = $_POST["nome"];

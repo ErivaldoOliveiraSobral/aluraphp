@@ -1,42 +1,39 @@
-<?php include("cabecalho.php"); ?>
+<?php 
+	include("cabecalho.php"); 
+	include("logica-usuario.php");
+?>
 
 	<h1>Bem Vindo</h1>
-
 	<h2>Login</h2>
+
 	<?php
-		if (isset($_GET["login"]) && $_GET["login"] == true){
-			?>
-			<p class="alert-success">Logado com sucesso</p>
-			<?php
-		}
-		if (isset($_GET["login"]) && $_GET["login"] == false){
-			?>
-			<p class="alert-danger">Usuário ou senha inválida</p>
-			<?php
-		}
+	
+		//exibe mensagem se usuario não estiver logado
+		usuarioNaoAutorizado();
+
+		//valida se login e senha do usuário são válidos
+		validarLogin();
 		
-		if (isset($_COOKIE["usuario_logado"])) {
-			?>
-			<p class="text-success">Você está logado como <?=$_COOKIE["usuario_logado"]?></p>
-			<?php
+		if (usuarioEstaLogado()) {
+			?><p class="text-success">Você está logado como <?=usuarioLogado()?></p><?php
 		} else {
-	?>
-	<form action="login.php" method="POST">
-		<table class="table">
-			<tr>
-				<td>Email</td>
-				<td><input class="form-control" type="email" name="email"></td>
-			</tr>
-			<tr>
-				<td>Senha</td>
-				<td><input class="form-control" type="password" name="senha"></td>
-			</tr>
-			<tr>
-				<td><button type="submit" class="btn btn-primary">Entrar</button></td>
-			</tr>
-		</table>
-	</form>
-	<?php
+			?>
+			<form action="login.php" method="POST">
+				<table class="table">
+					<tr>
+						<td>Email</td>
+						<td><input class="form-control" type="email" name="email"></td>
+					</tr>
+					<tr>
+						<td>Senha</td>
+						<td><input class="form-control" type="password" name="senha"></td>
+					</tr>
+					<tr>
+						<td><button type="submit" class="btn btn-primary">Entrar</button></td>
+					</tr>
+				</table>
+			</form>
+			<?php
 		}
 	?>
 
