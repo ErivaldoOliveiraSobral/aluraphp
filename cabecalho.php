@@ -1,6 +1,6 @@
 <?php
     error_reporting(E_ALL ^ E_NOTICE);
-    include("mostra-alerta.php");
+    require_once("mostra-alerta.php");
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +28,7 @@
                     <a class="nav-link" href="produto-lista.php">Produtos</a>
                 </li>
                     <li class="nav-item">
-                    <a class="nav-link disabled" href="sobre.php">Sobre</a>
+                    <a class="nav-link" href="contato.php">Contato</a>
                 </li>
             </ul>
         </div>
