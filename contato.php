@@ -12,7 +12,7 @@
 			</tr>
 			<tr>
 				<td>Mensagem</td>
-				<td><input type="text" name="mensagem" class="form-control"></td>
+				<td><textarea name="mensagem" class="form-control"></textarea></td>
 			</tr>
 		</table>
 		<tr>

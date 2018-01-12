@@ -9,9 +9,7 @@
 	use PHPMailer\PHPMailer\Exception;
 
 	require 'vendor/autoload.php';
-
-	$hotmail = "erivaldo_alemao@hotmail.com";
-	$gmail = "erivaldooliveirasobral@gmail.com";
+	$gmail = 'erivaldooliveirasobral@gmail.com';
 
 try {
 	
@@ -26,9 +24,9 @@ try {
     $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
     $mail->Port = 587;                                    // TCP port to connect to (587 ou 465)
 
-	$mail->setFrom($gmail, "Alura Curso PHP e MySQL");
-	$mail->addAddress($hotmail);
-	$mail->Subject = "Email de contato da loja";
+	$mail->setFrom($email, "Curso PHP e MySQL");
+	$mail->addAddress($gmail, "Erivaldo");
+	$mail->Subject = "Email de contato";
 	$mail->msgHTML("<html>De: {$nome} <br />Email: {$email} <br />Mensagem: {$mensagem}</html>");
 	$mail->AltBody = "De: {$nome}\nEmail: {$email}\nMensagem: {$mensagem}";
 
@@ -41,6 +39,5 @@ try {
 	}
 } catch (Exception $e){
 	$_SESSION["danger"] = "Erro ao enviar mensagem: ". $mail->ErrorInfo;
-	echo $e;
 	header("Location: contato.php");
 }
