@@ -1,6 +1,6 @@
 <?php
-	include("logica-usuario.php");
+	require_once("logica-usuario.php");
 
 	logout();
-
-	header("Location: index.php?logout=true");
+	$_SESSION["success"] = "Usuário deslogado com sucesso!";
+	header("Location: index.php");
