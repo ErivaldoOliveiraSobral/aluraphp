@@ -1,5 +1,6 @@
 <?php 
 	require_once("conecta.php");
+	require_once("class/Produto.php");
 
 function listaProdutos($conexao){
 	$produtos = array();
@@ -11,12 +12,12 @@ function listaProdutos($conexao){
 	return $produtos;
 }
 
-function insereProduto($conexao,$nome,$preco,$descricao,$categoria_id,$usado){
-	$nome = mysqli_real_escape_string($conexao, $nome);
-	$descricao = mysqli_real_escape_string($conexao, $descricao);
-	$preco = mysqli_real_escape_string($conexao, $preco);
+function insereProduto($conexao,Produto $produto){
+	$nome = mysqli_real_escape_string($conexao, $produto->nome);
+	$descricao = mysqli_real_escape_string($conexao, $produto->descricao);
+	$preco = mysqli_real_escape_string($conexao, $produto->preco);
 	//escrever query
-	$query = "insert into produtos (nome,preco,descricao,categoria_id,usado) values ('{$nome}','{$preco}','{$descricao}','{$categoria_id}','{$usado}');";
+	$query = "insert into produtos (nome,preco,descricao,categoria_id,usado) values ('{$produto->nome}','{$produto->preco}','{$produto->descricao}','{$produto->categoria_id}','{$produto->usado}');";
 	//enviar para o banco
 	return mysqli_query($conexao,$query);
 }
@@ -32,10 +33,10 @@ function buscaProduto($conexao,$id){
 	return mysqli_fetch_assoc($resultado);
 }
 
-function alteraProduto($conexao,$id,$nome,$preco,$descricao,$categoria_id,$usado){
-	$nome = mysqli_real_escape_string($conexao, $nome);
-	$descricao = mysqli_real_escape_string($conexao, $descricao);
-	$preco = mysqli_real_escape_string($conexao, $preco);
-	$query = "update produtos set nome='{$nome}',preco={$preco},descricao='{$descricao}',categoria_id={$categoria_id},usado={$usado} where id='{$id}'";
+function alteraProduto($conexao, Produto $produto){
+	$nome = mysqli_real_escape_string($conexao, $produto->nome);
+	$descricao = mysqli_real_escape_string($conexao, $produto->descricao);
+	$preco = mysqli_real_escape_string($conexao, $produto->preco);
+	$query = "update produtos set nome='{$produto->nome}',preco={$produto->preco},descricao='{$produto->descricao}',categoria_id={$produto->categoria_id},usado={$produto->usado} where id='{$produto->id}'";
 	return mysqli_query($conexao,$query);
 }
