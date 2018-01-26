@@ -3,16 +3,20 @@
 	require_once("banco-produto.php");
 	require_once("logica-usuario.php");
 	require_once("class/Produto.php");
+	require_once("class/Categoria.php");
 
 	//Proteje para que não seja adicionado sem que o usuário estaja logado
 	verificaUsuario();
 
-	//Objeto produto
+	//Objetos
 	$produto = new Produto();
+	$categoria = new Categoria();
+	$categoria->id = $_POST['categoria_id'];
+
 	$produto->nome = $_POST["nome"];
 	$produto->preco = $_POST["preco"];
 	$produto->descricao = $_POST['descricao'];
-	$produto->categoria_id = $_POST['categoria_id'];
+	$produto->categoria = $categoria;
 	
 	if(array_key_exists('usado', $_POST)){
 		$produto->usado = 1;
@@ -29,7 +33,7 @@
 		$mensagem_de_erro = mysqli_error($conexao);
 		?>
 			<p class="text-danger">Produto <?= $produto->nome ?> não adicionado!</p>
-			<p class="text-danger">Motivo: <?= $produto->mensagem_de_erro ?></p>
+			<p class="text-danger">Motivo: <?= $mensagem_de_erro ?></p>
 		<?php
 	}
 
