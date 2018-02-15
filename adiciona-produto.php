@@ -23,10 +23,13 @@
 	} else {
 		$produto->usado = 0;
 	}
+
+
+
 			
 	//verificar resultado
 	if(insereProduto($conexao, $produto)){
-		?>
+		?> 
 			<p class="text-success">Produto <?= $produto->nome ?>, R$ <?= $produto->preco ?> adicionado com sucesso!</p>
 		<?php
 	} else {
