@@ -9,7 +9,8 @@
 	use PHPMailer\PHPMailer\Exception;
 
 	require 'vendor/autoload.php';
-	$gmail = 'erivaldooliveirasobral@gmail.com';
+	$gmail = "erivaldooliveirasobral@gmail.com";
+	$senha = "JacquelineErivaldo";
 
 try {
 	
@@ -20,7 +21,7 @@ try {
     $mail->Host = 'smtp.gmail.com';  					  // Specify main and backup SMTP servers
     $mail->SMTPAuth = true;                               // Enable SMTP authentication
 	$mail->Username = $gmail;
-	$mail->Password = "JacquelineErivaldo";
+	$mail->Password = $senha;
     $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
     $mail->Port = 587;                                    // TCP port to connect to (587 ou 465)
 

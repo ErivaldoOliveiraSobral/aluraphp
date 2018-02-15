@@ -15,13 +15,14 @@ function listaProdutos($conexao){
 
 		$produto->id = $produto_array['id'];
 		$produto->nome = $produto_array['nome'];
-		$produto->preco = $produto_array['preco'];
+		$produto->preco = (double)$produto_array['preco'];
 		$produto->descricao = $produto_array['descricao'];
 		$produto->categoria = $categoria;
 		$produto->usado = $produto_array['usado'];
 
 		array_push($produtos, $produto);
 	}
+
 	return $produtos;
 }
 
@@ -43,7 +44,19 @@ function removeProduto($conexao,$id){
 function buscaProduto($conexao,$id){
 	$query = "select * from produtos where id={$id}";
 	$resultado = mysqli_query($conexao,$query);
-	return mysqli_fetch_assoc($resultado);
+	$produto_buscado = mysqli_fetch_assoc($resultado);
+
+	$produto = new Produto();
+	$categoria = new Categoria();
+	$produto->id = $produto_buscado['id'];
+	$produto->nome = $produto_buscado['nome'];
+	$produto->preco = $produto_buscado['preco'];
+	$produto->descricao = $produto_buscado['descricao'];
+	$categoria->id = $produto_buscado['categoria_id'];
+	$produto->categoria = $categoria;
+	$produto->usado = $produto_buscado['usado'];
+
+	return $produto;
 }
 
 function alteraProduto($conexao, Produto $produto){
