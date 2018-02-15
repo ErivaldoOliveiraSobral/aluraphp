@@ -4,7 +4,7 @@
 </tr>
 <tr>
 	<td>Preço:</td>
-	<td><input class="form-control" type="text" name="preco" value="<?= $produto->preco ?>"></td>
+	<td><input class="form-control" type="number" step="0.01" name="preco" value="<?= $produto->preco ?>"></td>
 </tr>
 <tr>
 	<td>Descrição:</td>
