@@ -12,7 +12,7 @@
  * @copyright 2012 - 2017 Marcus Bointon
  * @copyright 2010 - 2012 Jim Jagielski
  * @copyright 2004 - 2009 Andy Prevost
- * @license   http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
+ * @license   http://www.gnu.org/copyleft/lesser.html GNU Lesser General private License
  * @note      This program is distributed in the hope that it will be useful - WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
  * FITNESS FOR A PARTICULAR PURPOSE.
@@ -93,7 +93,7 @@ class SMTP
      *
      * @var int
      */
-    public $do_debug = self::DEBUG_OFF;
+    private $do_debug = self::DEBUG_OFF;
 
     /**
      * How to handle debug output.
@@ -116,7 +116,7 @@ class SMTP
      *
      * @var string|callable|\Psr\Log\LoggerInterface
      */
-    public $Debugoutput = 'echo';
+    private $Debugoutput = 'echo';
 
     /**
      * Whether to use VERP.
@@ -126,7 +126,7 @@ class SMTP
      *
      * @var bool
      */
-    public $do_verp = false;
+    private $do_verp = false;
 
     /**
      * The timeout value for connection, in seconds.
@@ -137,7 +137,7 @@ class SMTP
      *
      * @var int
      */
-    public $Timeout = 300;
+    private $Timeout = 300;
 
     /**
      * How long to wait for commands to complete, in seconds.
@@ -145,7 +145,7 @@ class SMTP
      *
      * @var int
      */
-    public $Timelimit = 300;
+    private $Timelimit = 300;
 
     /**
      * Patterns to extract an SMTP transaction id from reply to a DATA command.
@@ -285,7 +285,7 @@ class SMTP
      *
      * @return bool
      */
-    public function connect($host, $port = null, $timeout = 30, $options = [])
+    private function connect($host, $port = null, $timeout = 30, $options = [])
     {
         static $streamok;
         //This is enabled by default since 5.0.0 but some providers disable it
@@ -380,7 +380,7 @@ class SMTP
      *
      * @return bool
      */
-    public function startTLS()
+    private function startTLS()
     {
         if (!$this->sendCommand('STARTTLS', 'STARTTLS', 220)) {
             return false;
@@ -421,7 +421,7 @@ class SMTP
      *
      * @return bool True if successfully authenticated
      */
-    public function authenticate(
+    private function authenticate(
         $username,
         $password,
         $authtype = null,
@@ -584,7 +584,7 @@ class SMTP
      *
      * @return bool True if connected
      */
-    public function connected()
+    private function connected()
     {
         if (is_resource($this->smtp_conn)) {
             $sock_status = stream_get_meta_data($this->smtp_conn);
@@ -611,7 +611,7 @@ class SMTP
      *
      * @see quit()
      */
-    public function close()
+    private function close()
     {
         $this->setError('');
         $this->server_caps = null;
@@ -637,7 +637,7 @@ class SMTP
      *
      * @return bool
      */
-    public function data($msg_data)
+    private function data($msg_data)
     {
         //This will use the standard timelimit
         if (!$this->sendCommand('DATA', 'DATA', 354)) {
@@ -729,7 +729,7 @@ class SMTP
      *
      * @return bool
      */
-    public function hello($host = '')
+    private function hello($host = '')
     {
         //Try extended hello first (RFC 2821)
         return (bool) ($this->sendHello('EHLO', $host) or $this->sendHello('HELO', $host));
@@ -813,7 +813,7 @@ class SMTP
      *
      * @return bool
      */
-    public function mail($from)
+    private function mail($from)
     {
         $useVerp = ($this->do_verp ? ' XVERP' : '');
 
@@ -833,7 +833,7 @@ class SMTP
      *
      * @return bool
      */
-    public function quit($close_on_error = true)
+    private function quit($close_on_error = true)
     {
         $noerror = $this->sendCommand('QUIT', 'QUIT', 221);
         $err = $this->error; //Save any error
@@ -855,7 +855,7 @@ class SMTP
      *
      * @return bool
      */
-    public function recipient($address)
+    private function recipient($address)
     {
         return $this->sendCommand(
             'RCPT TO',
@@ -871,7 +871,7 @@ class SMTP
      *
      * @return bool True on success
      */
-    public function reset()
+    private function reset()
     {
         return $this->sendCommand('RSET', 'RSET', 250);
     }
@@ -956,7 +956,7 @@ class SMTP
      *
      * @return bool
      */
-    public function sendAndMail($from)
+    private function sendAndMail($from)
     {
         return $this->sendCommand('SAML', "SAML FROM:$from", 250);
     }
@@ -968,7 +968,7 @@ class SMTP
      *
      * @return bool
      */
-    public function verify($name)
+    private function verify($name)
     {
         return $this->sendCommand('VRFY', "VRFY $name", [250, 251]);
     }
@@ -979,7 +979,7 @@ class SMTP
      *
      * @return bool
      */
-    public function noop()
+    private function noop()
     {
         return $this->sendCommand('NOOP', 'NOOP', 250);
     }
@@ -993,7 +993,7 @@ class SMTP
      *
      * @return bool
      */
-    public function turn()
+    private function turn()
     {
         $this->setError('The SMTP TURN command is not implemented');
         $this->edebug('SMTP NOTICE: ' . $this->error['error'], self::DEBUG_CLIENT);
@@ -1009,7 +1009,7 @@ class SMTP
      *
      * @return int|bool The number of bytes sent to the server or false on error
      */
-    public function client_send($data, $command = '')
+    private function client_send($data, $command = '')
     {
         //If SMTP transcripts are left enabled, or debug output is posted online
         //it can leak credentials, so hide credentials in all but lowest level
@@ -1031,7 +1031,7 @@ class SMTP
      *
      * @return array
      */
-    public function getError()
+    private function getError()
     {
         return $this->error;
     }
@@ -1041,7 +1041,7 @@ class SMTP
      *
      * @return array|null
      */
-    public function getServerExtList()
+    private function getServerExtList()
     {
         return $this->server_caps;
     }
@@ -1063,7 +1063,7 @@ class SMTP
      *
      * @return mixed
      */
-    public function getServerExt($name)
+    private function getServerExt($name)
     {
         if (!$this->server_caps) {
             $this->setError('No HELO/EHLO was sent');
@@ -1091,7 +1091,7 @@ class SMTP
      *
      * @return string
      */
-    public function getLastReply()
+    private function getLastReply()
     {
         return $this->last_reply;
     }
@@ -1166,7 +1166,7 @@ class SMTP
      *
      * @param bool $enabled
      */
-    public function setVerp($enabled = false)
+    private function setVerp($enabled = false)
     {
         $this->do_verp = $enabled;
     }
@@ -1176,7 +1176,7 @@ class SMTP
      *
      * @return bool
      */
-    public function getVerp()
+    private function getVerp()
     {
         return $this->do_verp;
     }
@@ -1204,7 +1204,7 @@ class SMTP
      *
      * @param string|callable $method The name of the mechanism to use for debugging output, or a callable to handle it
      */
-    public function setDebugOutput($method = 'echo')
+    private function setDebugOutput($method = 'echo')
     {
         $this->Debugoutput = $method;
     }
@@ -1214,7 +1214,7 @@ class SMTP
      *
      * @return string
      */
-    public function getDebugOutput()
+    private function getDebugOutput()
     {
         return $this->Debugoutput;
     }
@@ -1224,7 +1224,7 @@ class SMTP
      *
      * @param int $level
      */
-    public function setDebugLevel($level = 0)
+    private function setDebugLevel($level = 0)
     {
         $this->do_debug = $level;
     }
@@ -1234,7 +1234,7 @@ class SMTP
      *
      * @return int
      */
-    public function getDebugLevel()
+    private function getDebugLevel()
     {
         return $this->do_debug;
     }
@@ -1244,7 +1244,7 @@ class SMTP
      *
      * @param int $timeout The timeout duration in seconds
      */
-    public function setTimeout($timeout = 0)
+    private function setTimeout($timeout = 0)
     {
         $this->Timeout = $timeout;
     }
@@ -1254,7 +1254,7 @@ class SMTP
      *
      * @return int
      */
-    public function getTimeout()
+    private function getTimeout()
     {
         return $this->Timeout;
     }
@@ -1318,7 +1318,7 @@ class SMTP
      *
      * @see recordLastTransactionID()
      */
-    public function getLastTransactionID()
+    private function getLastTransactionID()
     {
         return $this->last_smtp_transaction_id;
     }

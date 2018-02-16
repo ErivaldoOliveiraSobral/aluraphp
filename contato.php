@@ -1,4 +1,6 @@
 <?php require_once("cabecalho.php"); ?>
+	
+	<h1>Fale Conosco</h1>
 
 	<form action="envia-contato.php" method="POST">
 		<table class="table">
