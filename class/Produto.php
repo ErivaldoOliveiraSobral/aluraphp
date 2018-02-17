@@ -9,8 +9,6 @@
 		private $descricao;
 		private $categoria;
 		private $usado;
-		private $isbn;
-		private $tipoProduto;
 
 		function __construct($nome, $preco, $descricao, Categoria $categoria, $usado) {
 			$this->nome = $nome;
@@ -28,6 +26,10 @@
 					"Categoria: ".$this->categoria.
 					"]".
 					"<br />";
+		}
+
+		public function calculaImposto() {
+			return $this->preco * (19.5 / 100);
 		}
 
 		public function precoComDesconto($valor = 10) {
@@ -62,18 +64,8 @@
 		public function setUsado($usado) {
 			$this->usado = $usado;
 		}
-		public function getIsbn() {
-			return $this->isbn;
+		public function temIsbn() {
+			return $this instanceof Livro;
 		}
-		public function setIsbn($isbn) {
-			$this->isbn = $isbn;
-		}
-		public function getTipoProduto() {
-			return $this->tipoProduto;
-		}
-		public function setTipoProduto($tipoProduto) {
-			$this->tipoProduto = $tipoProduto;
-		}
-
 	}
 ?>

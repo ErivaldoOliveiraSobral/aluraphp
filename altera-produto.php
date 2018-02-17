@@ -18,10 +18,14 @@
 		$usado = 0;
 	}
 
-	$produto = new Produto($nome, $preco, $descricao, $categoria, $usado);
+	if($tipoProduto == "Livro") {
+		$produto = new Livro($nome, $preco, $descricao, $categoria, $usado);
+		$produto->setIsbn($isbn);
+	} else {
+		$produto = new Produto($nome, $preco, $descricao, $categoria, $usado);
+	}
+
 	$produto->setId($id);
-	$produto->setIsbn($isbn);
-	$produto->setTipoProduto($tipoProduto);
 
 	$produtoDAO = new ProdutoDAO($conexao);
 

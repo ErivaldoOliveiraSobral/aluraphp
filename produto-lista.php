@@ -21,7 +21,7 @@
 		<tr>
 			<td><?= $produto->getNome()?></td>
 			<td>R$ <?=$produto->getPreco()?></td>
-			<td>R$ <?=$produto->precoComDesconto(30)?></td>
+			<td>R$ <?=$produto->calculaImposto()?></td>
 			<td><?=substr($produto->getDescricao(),0,40)?></td>
 			<td><?=$produto->getCategoria()->getNome()?></td>
 			<td>
@@ -38,7 +38,15 @@
 					//print $produto->isUsado() ? "<input class='form-control' type='checkbox' name='usado' checked='checked' disabled='true'>":"<input class='form-control' type='checkbox' name='usado' disabled='true'>";
 				?>
 			</td>
-			<td><?=$produto->getIsbn()?></td>
+			<td>
+				<?php
+					if($produto->temIsbn()) {
+						?>
+							<?=$produto->getIsbn()?>
+						<?php
+					}
+				?>
+			</td>
 			<td><a href="produto-altera-formulario.php?id=<?=$produto->getId()?>" class="btn btn-primary">Alterar</a></td>
 			<td>
 				<form action="remove-produto.php" method="POST">

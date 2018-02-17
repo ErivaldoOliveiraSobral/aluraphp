@@ -30,13 +30,13 @@
 	</td>
 </tr>
 <tr>
-	<td>Tipo do Livro:</td>
+	<td>Tipo:</td>
 	<td>
 		<select name="tipo_produto" class="form-control">
 			<?php
 				$tipos = array("Produto","Livro");
 				foreach ($tipos as $tipo):
-					$esseEhOTipo = $produto->getTipoProduto() == $tipo;
+					$esseEhOTipo = get_class($produto) == $tipo;
 					$selecao = $esseEhOTipo ? "selected='selected'":"";
 					?><option value="<?=$tipo?>" <?=$selecao?>><?=$tipo?></option><?php
 				endforeach
@@ -46,5 +46,12 @@
 </tr>
 <tr>
 	<td>ISBN:</td>
-	<td><input class="form-control" type="text" name="isbn" value="<?=$produto->getIsbn()?>"></td>
+	<td>
+		<?php
+			if($produto->temIsbn()) {
+				$valor = $produto->getIsbn();
+			}
+		?>
+		<input type="text" name="isbn" class="form-control" value="<?=$valor?>">
+	</td>
 </tr>
