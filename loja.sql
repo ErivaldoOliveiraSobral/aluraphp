@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.6.6deb5
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: 12-Jan-2018 às 17:36
--- Versão do servidor: 5.7.19
--- PHP Version: 7.1.9
+-- Host: localhost:3306
+-- Tempo de geração: 17/02/2018 às 14:18
+-- Versão do servidor: 5.7.21-0ubuntu0.17.10.1
+-- Versão do PHP: 7.0.22-0ubuntu0.17.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -19,24 +17,25 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `loja`
+-- Banco de dados: `loja`
 --
+CREATE DATABASE IF NOT EXISTS `loja` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `loja`;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `categorias`
+-- Estrutura para tabela `categorias`
 --
 
 DROP TABLE IF EXISTS `categorias`;
-CREATE TABLE IF NOT EXISTS `categorias` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nome` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+CREATE TABLE `categorias` (
+  `id` int(11) NOT NULL,
+  `nome` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `categorias`
+-- Fazendo dump de dados para tabela `categorias`
 --
 
 INSERT INTO `categorias` (`id`, `nome`) VALUES
@@ -48,55 +47,92 @@ INSERT INTO `categorias` (`id`, `nome`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `produtos`
+-- Estrutura para tabela `produtos`
 --
 
 DROP TABLE IF EXISTS `produtos`;
-CREATE TABLE IF NOT EXISTS `produtos` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `produtos` (
+  `id` int(11) NOT NULL,
   `nome` varchar(255) DEFAULT NULL,
   `preco` decimal(10,2) DEFAULT NULL,
   `descricao` text CHARACTER SET latin1 COLLATE latin1_bin NOT NULL,
   `categoria_id` int(11) DEFAULT NULL,
   `usado` tinyint(1) DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
+  `isbn` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `produtos`
+-- Fazendo dump de dados para tabela `produtos`
 --
 
-INSERT INTO `produtos` (`id`, `nome`, `preco`, `descricao`, `categoria_id`, `usado`) VALUES
-(24, 'Tesla Novo', '50000.00', 'Carro Muito Esportivo', 3, 0),
-(25, 'Fusca Batido', '20000.00', 'Fusca Velho', 3, 1),
-(31, 'Fusca', '1000.00', 'Fusca Velho', 3, 1),
-(33, 'Fusca', '5000.00', 'Velho', 3, 1),
-(35, 'Alguma coisa', '486.00', 'Alguma coisa', 3, 1),
-(38, 'bola d\'agua', '486.00', 'bola d\'agua', 1, 1),
-(39, 'bola d\'agua', '13.00', 'bola d\'agua', 1, 1);
+INSERT INTO `produtos` (`id`, `nome`, `preco`, `descricao`, `categoria_id`, `usado`, `isbn`) VALUES
+(25, 'Fusca Batido', '20000.00', 'Fusca Velho', 3, 1, NULL),
+(27, 'Gol', '7500.00', 'Volkswagem', 3, 1, NULL),
+(31, 'Livro', '1000.00', 'Teste de Livro', 2, 1, '123456789'),
+(32, 'Novo Livro', '200.00', 'Teste de Livro', 2, 1, '12345677'),
+(33, 'Manual Tesla', '1000.00', 'Manuel do usuÃ¡rio', 2, 0, '123123123');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `usuarios`
+-- Estrutura para tabela `usuarios`
 --
 
 DROP TABLE IF EXISTS `usuarios`;
-CREATE TABLE IF NOT EXISTS `usuarios` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `usuarios` (
+  `id` int(11) NOT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `senha` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+  `senha` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `usuarios`
+-- Fazendo dump de dados para tabela `usuarios`
 --
 
 INSERT INTO `usuarios` (`id`, `email`, `senha`) VALUES
 (1, 'erivaldooliveirasobral@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055');
-COMMIT;
 
+--
+-- Índices de tabelas apagadas
+--
+
+--
+-- Índices de tabela `categorias`
+--
+ALTER TABLE `categorias`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices de tabela `produtos`
+--
+ALTER TABLE `produtos`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices de tabela `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT de tabelas apagadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `categorias`
+--
+ALTER TABLE `categorias`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT de tabela `produtos`
+--
+ALTER TABLE `produtos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+--
+-- AUTO_INCREMENT de tabela `usuarios`
+--
+ALTER TABLE `usuarios`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
