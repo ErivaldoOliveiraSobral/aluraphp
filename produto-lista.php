@@ -11,6 +11,7 @@
 			<td><b>DESCRIÇÃO</b></td>
 			<td><b>TIPO</b></td>
 			<td><b>USADO</b></td>
+			<td><b>ISBN</b></td>
 		</tr>
 		<?php 
 			$produtoDAO = new ProdutoDAO($conexao);
@@ -37,12 +38,14 @@
 					//print $produto->isUsado() ? "<input class='form-control' type='checkbox' name='usado' checked='checked' disabled='true'>":"<input class='form-control' type='checkbox' name='usado' disabled='true'>";
 				?>
 			</td>
-			<td><a href="produto-altera-formulario.php?id=<?=$produto->getId()?>" class="btn btn-primary">Alterar</a>
+			<td><?=$produto->getIsbn()?></td>
+			<td><a href="produto-altera-formulario.php?id=<?=$produto->getId()?>" class="btn btn-primary">Alterar</a></td>
 			<td>
 				<form action="remove-produto.php" method="POST">
 					<input type="hidden" name="id" value="<?=$produto->getId()?>">
 					<button class="btn btn-danger">Remover</button>
 				</form>
+			</td>
 		</tr>
 		
 		<?php 

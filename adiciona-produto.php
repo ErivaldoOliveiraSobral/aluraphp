@@ -9,6 +9,8 @@
 	$preco = $_POST['preco'];
 	$descricao = $_POST['descricao'];
 	$categoria_id = $_POST['categoria_id'];
+	$tipoProduto = $_POST['tipo_produto'];
+	$isbn = $_POST['isbn'];
 
 	$categoria = new Categoria();
 	$categoria->setId($categoria_id);
@@ -20,6 +22,8 @@
 	}
 
 	$produto = new Produto($nome, $preco, $descricao, $categoria, $usado);
+	$produto->setTipoProduto($tipoProduto);
+	$produto->setIsbn($isbn);
 
 	$produtoDAO = new ProdutoDAO($conexao);
 

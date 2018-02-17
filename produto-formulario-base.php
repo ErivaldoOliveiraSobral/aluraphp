@@ -29,3 +29,22 @@
 		</select>
 	</td>
 </tr>
+<tr>
+	<td>Tipo do Livro:</td>
+	<td>
+		<select name="tipo_produto" class="form-control">
+			<?php
+				$tipos = array("Produto","Livro");
+				foreach ($tipos as $tipo):
+					$esseEhOTipo = $produto->getTipoProduto() == $tipo;
+					$selecao = $esseEhOTipo ? "selected='selected'":"";
+					?><option value="<?=$tipo?>" <?=$selecao?>><?=$tipo?></option><?php
+				endforeach
+			?>
+		</select>
+	</td>
+</tr>
+<tr>
+	<td>ISBN:</td>
+	<td><input class="form-control" type="text" name="isbn" value="<?=$produto->getIsbn()?>"></td>
+</tr>

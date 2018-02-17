@@ -22,12 +22,16 @@ class ProdutoDAO {
 			$descricao = $produto_array['descricao'];
 			$categoria_nome = $produto_array['categoria_nome'];
 			$usado = $produto_array['usado'];
+			$isbn = $produto_array['isbn'];
+			$tipoProduto = $produto_array['tipoProduto'];
 
 			$categoria = new Categoria();
 			$categoria->setNome($categoria_nome);
 
 			$produto = new Produto($nome, $preco, $descricao, $categoria, $usado);
 			$produto->setId($id);
+			$produto->setIsbn($isbn);
+			$produto->setTipoProduto($tipoProduto);
 
 			array_push($produtos, $produto);
 		}
@@ -39,9 +43,18 @@ class ProdutoDAO {
 		$nome = mysqli_real_escape_string($this->conexao, $produto->getNome());
 		$descricao = mysqli_real_escape_string($this->conexao, $produto->getDescricao());
 		$preco = mysqli_real_escape_string($this->conexao, $produto->getPreco());
+		$isbn = mysqli_real_escape_string($this->conexao, $produto->getIsbn());
 
 		//escrever query
-		$query = "insert into produtos (nome,preco,descricao,categoria_id,usado) values ('{$nome}','{$preco}','{$descricao}','{$produto->getCategoria()->getId()}','{$produto->isUsado()}');";
+		$query = "insert into produtos (nome,preco,descricao,categoria_id,usado,isbn,tipoProduto) values (
+			'{$nome}',
+			'{$preco}',
+			'{$descricao}',
+			'{$produto->getCategoria()->getId()}',
+			'{$produto->isUsado()}',
+			'{$isbn}',
+			'{$produto->getTipoProduto()}'
+		);";
 
 		//enviar para o banco
 		return mysqli_query($this->conexao,$query);
@@ -63,12 +76,16 @@ class ProdutoDAO {
 		$descricao = $produto_buscado['descricao'];
 		$categoria_id = $produto_buscado['categoria_id'];
 		$usado = $produto_buscado['usado'];
+		$isbn = $produto_buscado['isbn'];
+		$tipoProduto = $produto_buscado['tipoProduto'];
 
 		$categoria = new Categoria();
 		$categoria->setId($categoria_id);
 
 		$produto = new Produto($nome, $preco, $descricao, $categoria, $usado);
 		$produto->setId($id);
+		$produto->setIsbn($isbn);
+		$produto->setTipoProduto($tipoProduto);
 
 		return $produto;
 	}
@@ -77,7 +94,17 @@ class ProdutoDAO {
 		$nome = mysqli_real_escape_string($this->conexao, $produto->getNome());
 		$descricao = mysqli_real_escape_string($this->conexao, $produto->getDescricao());
 		$preco = mysqli_real_escape_string($this->conexao, $produto->getPreco());
-		$query = "update produtos set nome='{$nome}',preco={$preco},descricao='{$descricao}',categoria_id={$produto->getCategoria()->getId()},usado={$produto->isUsado()} where id='{$produto->getId()}'";
+		$isbn = mysqli_real_escape_string($this->conexao, $produto->getIsbn());
+
+		$query = "update produtos set 
+				nome='{$nome}',
+				preco={$preco},
+				descricao='{$descricao}',
+				categoria_id={$produto->getCategoria()->getId()},
+				usado={$produto->isUsado()},
+				isbn='{$isbn}',
+				tipoProduto='{$produto->getTipoProduto()}' 
+			where id='{$produto->getId()}'";
 		return mysqli_query($this->conexao,$query);
 	}
 }
