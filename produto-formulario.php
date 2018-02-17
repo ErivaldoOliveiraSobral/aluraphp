@@ -1,9 +1,9 @@
 <?php 
 	require_once("cabecalho.php");
-	require_once("banco-categoria.php");
 	require_once("logica-usuario.php");
-	
-	$categorias = listarCategorias($conexao);
+
+	$categoriaDAO = new CategoriaDAO($conexao);
+	$categorias = $categoriaDAO->listarCategorias();
 	verificaUsuario();
 	
 	$categoria = new Categoria();

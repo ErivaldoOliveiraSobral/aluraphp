@@ -13,7 +13,7 @@ class CategoriaDAO {
 	function listarCategorias(){
 		$categorias = array();
 		$query = "select * from categorias";
-		$resultado = mysqli_query($this->$conexao,$query);
+		$resultado = mysqli_query($this->conexao,$query);
 
 		while($categoria_array = mysqli_fetch_assoc($resultado)){
 			$categoria = new Categoria();

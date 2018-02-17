@@ -1,6 +1,5 @@
 <?php 
 	require_once("cabecalho.php");
-	require_once("banco-produto.php");
 ?>
 
 	<table class="table table-striped table-bordered"> 		
@@ -14,7 +13,8 @@
 			<td><b>USADO</b></td>
 		</tr>
 		<?php 
-			$produtos = listaProdutos($conexao);
+			$produtoDAO = new ProdutoDAO($conexao);
+			$produtos = $produtoDAO->listaProdutos();
 			foreach ($produtos as $produto):
 		?>
 		<tr>

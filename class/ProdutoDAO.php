@@ -10,9 +10,9 @@ class ProdutoDAO {
 		$this->conexao = $conexao;
 	}
 
-	function listaProdutos(){
+	public function listaProdutos(){
 		$produtos = array();
-		$result = mysqli_query($this->$conexao,"select p.*,c.nome as categoria_nome from produtos as p join categorias as c on p.categoria_id=c.id;");
+		$result = mysqli_query($this->conexao,"select p.*,c.nome as categoria_nome from produtos as p join categorias as c on p.categoria_id=c.id;");
 
 		while ($produto_array = mysqli_fetch_assoc($result)) {
 
@@ -35,24 +35,26 @@ class ProdutoDAO {
 		return $produtos;
 	}
 
-	function insereProduto(Produto $produto){
-		$nome = mysqli_real_escape_string($this->$conexao, $produto->getNome());
-		$descricao = mysqli_real_escape_string($this->$conexao, $produto->getDescricao());
-		$preco = mysqli_real_escape_string($this->$conexao, $produto->getPreco());
+	public function insereProduto(Produto $produto){
+		$nome = mysqli_real_escape_string($this->conexao, $produto->getNome());
+		$descricao = mysqli_real_escape_string($this->conexao, $produto->getDescricao());
+		$preco = mysqli_real_escape_string($this->conexao, $produto->getPreco());
+
 		//escrever query
 		$query = "insert into produtos (nome,preco,descricao,categoria_id,usado) values ('{$nome}','{$preco}','{$descricao}','{$produto->getCategoria()->getId()}','{$produto->isUsado()}');";
+
 		//enviar para o banco
-		return mysqli_query($this->$conexao,$query);
+		return mysqli_query($this->conexao,$query);
 	}
 
-	function removeProduto($id){
+	public function removeProduto($id){
 		$query = "delete from produtos where id={$id};";
-		return mysqli_query($this->$conexao,$query);
+		return mysqli_query($this->conexao,$query);
 	}
 
-	function buscaProduto($id){
+	public function buscaProduto($id){
 		$query = "select * from produtos where id={$id}";
-		$resultado = mysqli_query($this->$conexao,$query);
+		$resultado = mysqli_query($this->conexao,$query);
 		$produto_buscado = mysqli_fetch_assoc($resultado);
 
 		$id = $produto_buscado['id'];
@@ -71,14 +73,13 @@ class ProdutoDAO {
 		return $produto;
 	}
 
-	function alteraProduto(Produto $produto){
-		$nome = mysqli_real_escape_string($this->$conexao, $produto->getNome());
-		$descricao = mysqli_real_escape_string($this->$conexao, $produto->getDescricao());
-		$preco = mysqli_real_escape_string($this->$conexao, $produto->getPreco());
+	public function alteraProduto(Produto $produto){
+		$nome = mysqli_real_escape_string($this->conexao, $produto->getNome());
+		$descricao = mysqli_real_escape_string($this->conexao, $produto->getDescricao());
+		$preco = mysqli_real_escape_string($this->conexao, $produto->getPreco());
 		$query = "update produtos set nome='{$nome}',preco={$preco},descricao='{$descricao}',categoria_id={$produto->getCategoria()->getId()},usado={$produto->isUsado()} where id='{$produto->getId()}'";
-		return mysqli_query($this->$conexao,$query);
+		return mysqli_query($this->conexao,$query);
 	}
-
 }
 
 ?>

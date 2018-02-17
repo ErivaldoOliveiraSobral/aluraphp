@@ -1,8 +1,7 @@
 <?php 
 	require_once("cabecalho.php");
-	require_once("banco-produto.php");
 	require_once("logica-usuario.php");
-	
+
 	//Proteje para que não seja adicionado sem que o usuário estaja logado
 	verificaUsuario();
 
@@ -21,9 +20,11 @@
 	}
 
 	$produto = new Produto($nome, $preco, $descricao, $categoria, $usado);
-	
+
+	$produtoDAO = new ProdutoDAO($conexao);
+
 	//verificar resultado
-	if(insereProduto($conexao, $produto)){
+	if($produtoDAO->insereProduto($produto)){
 		?> 
 			<p class="text-success">Produto <?= $produto->getNome() ?>, R$ <?= $produto->getPreco() ?> adicionado com sucesso!</p>
 		<?php
