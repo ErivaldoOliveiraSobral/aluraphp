@@ -25,13 +25,16 @@
 			<td><?=$produto->getCategoria()->getNome()?></td>
 			<td>
 				<?php
-					if($produto->getUsado()) {
+					
+					if($produto->isUsado()) {
 						//echo "sim";
 						?><input class="form-control" type="checkbox" name="usado" checked="checked" disabled="true"><?php
 					} else {
 						//echo "não";
 						?><input class="form-control" type="checkbox" name="usado" disabled="true"><?php
 					}
+
+					//print $produto->isUsado() ? "<input class='form-control' type='checkbox' name='usado' checked='checked' disabled='true'>":"<input class='form-control' type='checkbox' name='usado' disabled='true'>";
 				?>
 			</td>
 			<td><a href="produto-altera-formulario.php?id=<?=$produto->getId()?>" class="btn btn-primary">Alterar</a>

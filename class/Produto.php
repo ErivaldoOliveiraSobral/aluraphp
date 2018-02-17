@@ -10,6 +10,23 @@
 		private $categoria;
 		private $usado;
 
+		function __construct($nome, $preco, $descricao, Categoria $categoria, $usado) {
+			$this->nome = $nome;
+			$this->preco = $preco;
+			$this->descricao = $descricao;
+			$this->categoria = $categoria;
+			$this->usado = $usado;
+		}
+		function __toString() {
+			return "[".
+					"Nome: ".$this->nome."|".
+					"Preço: R$".$this->preco."|".
+					"Descrição: ".$this->descricao."|".
+					"Categoria: ".$this->categoria.
+					"]".
+					"<br />";
+		}
+
 		public function precoComDesconto($valor = 10) {
 			//$this->preco -= $this->preco * ($valor / 100);
 			if ($valor > 0 && $valor <= 50) {
@@ -48,7 +65,7 @@
 		public function setCategoria($categoria) {
 			$this->categoria = $categoria;
 		}
-		public function getUsado() {
+		public function isUsado() {
 			return $this->usado;
 		}
 		public function setUsado($usado) {

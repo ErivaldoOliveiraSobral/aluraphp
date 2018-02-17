@@ -8,10 +8,10 @@
 	$categorias = listarCategorias($conexao);
 	verificaUsuario();
 	
-	$produto = new Produto();
 	$categoria = new Categoria();
 	$categoria->setId(1);
-	$produto->setCategoria($categoria);
+
+	$produto = new Produto("", "", "", $categoria, "");
 
 	//$produto = array('nome' => "", "descricao" => "", "preco" => "", "categoria_id" => "1");
 	//$usado = "";

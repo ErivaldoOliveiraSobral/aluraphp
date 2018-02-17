@@ -12,7 +12,7 @@
 </tr>
 <tr>
 	<td></td>
-	<td><input class="form-control" type="checkbox" name="usado" <?=$produto->getUsado()?>> Usado</td>
+	<td><input class="form-control" type="checkbox" name="usado" <?=$produto->isUsado()?>> Usado</td>
 </tr>
 <tr>
 	<td>Categoria:</td>

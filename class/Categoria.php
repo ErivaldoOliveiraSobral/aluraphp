@@ -19,5 +19,9 @@
 		public function setNome($nome) {
 			$this->nome = $nome;
 		}
+
+		function __toString() {
+			return $this->nome;
+		}
 	}
 ?>
