@@ -1,6 +1,4 @@
 <?php
-	require_once("class/Produto.php");
-	require_once("class/Categoria.php");
 
 	$categoria = new Categoria();
 	$categoria->setNome("Escolar");

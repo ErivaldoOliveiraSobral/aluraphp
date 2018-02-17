@@ -2,9 +2,7 @@
 	require_once("cabecalho.php");
 	require_once("banco-produto.php");
 	require_once("logica-usuario.php");
-	require_once("class/Produto.php");
-	require_once("class/Categoria.php");
-
+	
 	//Proteje para que não seja adicionado sem que o usuário estaja logado
 	verificaUsuario();
 
